@@ -3,6 +3,16 @@ web3 for java 样例程序 (基于web3j 5.0.0)
 环境 idea maven  
 运行前提 需要有一个开启RPC或者IPC服务的以太坊节点
 
+安装以太坊节点:
+```
+$ sudo add-apt-repository -y ppa:ethereum/ethereum
+$ sudo apt-get update
+$ sudo apt-get install ethereum
+
+$ geth console --ropsten --syncmode "fast" --http --http.addr "localhost" --http.port "8545" --http.corsdomain "*" --http.api="eth,net,web3,personal"  --nousb
+```
+
+
 - [QuickStart](https://github.com/ethjava/web3j-sample/blob/master/src/main/java/com/ethjava/QuickStart.java) 快速开始
 
 - [AccountManager](https://github.com/ethjava/web3j-sample/blob/master/src/main/java/com/ethjava/AccountManager.java) 账号相关接口
