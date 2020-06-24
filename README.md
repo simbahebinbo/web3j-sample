@@ -1,5 +1,5 @@
 # web3j-sample
-web3 for java 样例程序 (基于web3j 3.6.0)   
+web3 for java 样例程序 (基于web3j 5.0.0)   
 环境 idea maven  
 运行前提 需要有一个开启RPC或者IPC服务的以太坊节点
 
@@ -21,8 +21,3 @@ web3 for java 样例程序 (基于web3j 3.6.0)
 - [Solidity](https://github.com/ethjava/web3j-sample/tree/master/src/main/java/com/ethjava/sol) 合约类相关
 - [LinkToken Support](https://github.com/ethjava/web3j-sample/tree/LinkToken) 链克支持
 
---- 
-
-打赏 eth地址:0x248F272180db4D079443753336c5C847A080275c
-
-[博客Blog](https://blog.csdn.net/u011181222)
