@@ -45,8 +45,8 @@
 //    Subscription subscription = web3j.
 //        blockObservable(false).
 //        subscribe(block -> {
-//          System.out.println("new block come in");
-//          System.out.println("block number" + block.getBlock().getNumber());
+//          log.info("new block come in");
+//          log.info("block number" + block.getBlock().getNumber());
 //        });
 //  }
 //
@@ -54,8 +54,8 @@
 //    Subscription subscription = web3j.
 //        transactionObservable().
 //        subscribe(transaction -> {
-//          System.out.println("transaction come in");
-//          System.out.println("transaction txHash " + transaction.getHash());
+//          log.info("transaction come in");
+//          log.info("transaction txHash " + transaction.getHash());
 //        });
 //  }
 //
@@ -71,8 +71,8 @@
 //            DefaultBlockParameter.valueOf(endBlock),
 //            false).
 //        subscribe(ethBlock -> {
-//          System.out.println("replay block");
-//          System.out.println(ethBlock.getBlock().getNumber());
+//          log.info("replay block");
+//          log.info(ethBlock.getBlock().getNumber());
 //        });
 //
 //    /**
@@ -83,8 +83,8 @@
 //            DefaultBlockParameter.valueOf(startBlock),
 //            DefaultBlockParameter.valueOf(endBlock)).
 //        subscribe(transaction -> {
-//          System.out.println("replay transaction");
-//          System.out.println("txHash " + transaction.getHash());
+//          log.info("replay transaction");
+//          log.info("txHash " + transaction.getHash());
 //        });
 //  }
 //
@@ -97,8 +97,8 @@
 //    Subscription subscription = web3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
 //        DefaultBlockParameter.valueOf(startBlock), false)
 //        .subscribe(block -> {
-//          System.out.println("block");
-//          System.out.println(block.getBlock().getNumber());
+//          log.info("block");
+//          log.info(block.getBlock().getNumber());
 //        });
 //
 //    /**
@@ -107,8 +107,8 @@
 //    Subscription subscription2 = web3j.catchUpToLatestAndSubscribeToNewTransactionsObservable(
 //        DefaultBlockParameter.valueOf(startBlock))
 //        .subscribe(tx -> {
-//          System.out.println("transaction");
-//          System.out.println(tx.getHash());
+//          log.info("transaction");
+//          log.info(tx.getHash());
 //        });
 //  }
 //}

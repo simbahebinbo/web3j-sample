@@ -5,11 +5,8 @@ web3 for java 样例程序 (基于web3j 5.0.0)
 
 安装以太坊节点:
 ```
-$ sudo add-apt-repository -y ppa:ethereum/ethereum
-$ sudo apt-get update
-$ sudo apt-get install ethereum
-
-$ geth console --ropsten --syncmode "fast" --http --http.addr "localhost" --http.port "8545" --http.corsdomain "*" --http.api="eth,net,web3,personal"  --nousb
+$ docker pull ethereum/client-go
+$ docker run --name eth --detach -p 8546:8546 -p 8545:8545 -v ~/.geth-ropsten:/geth -it ethereum/client-go --syncmode "light" --ropsten --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --http --http.addr 0.0.0.0 --http.corsdomain "*" --http.api="eth,net,web3,personal" --datadir /geth  --nousb
 ```
 
 

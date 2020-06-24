@@ -43,14 +43,14 @@
 //
 //		String topicData = EventEncoder.encode(event);
 //		filter.addSingleTopic(topicData);
-//		System.out.println(topicData);
+//		log.info(topicData);
 //
 //		web3j.ethLogObservable(filter).subscribe(log -> {
-//			System.out.println(log.getBlockNumber());
-//			System.out.println(log.getTransactionHash());
+//			log.info(log.getBlockNumber());
+//			log.info(log.getTransactionHash());
 //			List<String> topics = log.getTopics();
 //			for (String topic : topics) {
-//				System.out.println(topic);
+//				log.info(topic);
 //			}
 //		});
 //	}

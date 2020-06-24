@@ -98,29 +98,29 @@
 //	private static EthHDWallet createEthWallet(DeterministicSeed ds, String[] pathArray, String password) {
 //		//根私钥
 //		byte[] seedBytes = ds.getSeedBytes();
-//		System.out.println("根私钥 " + Arrays.toString(seedBytes));
+//		log.info("根私钥 " + Arrays.toString(seedBytes));
 //		//助记词
 //		List<String> mnemonic = ds.getMnemonicCode();
-//		System.out.println("助记词 " + Arrays.toString(mnemonic.toArray()));
+//		log.info("助记词 " + Arrays.toString(mnemonic.toArray()));
 //
 //		try {
 //			//助记词种子
 //			byte[] mnemonicSeedBytes = MnemonicCode.INSTANCE.toEntropy(mnemonic);
-//			System.out.println("助记词种子 " + Arrays.toString(mnemonicSeedBytes));
+//			log.info("助记词种子 " + Arrays.toString(mnemonicSeedBytes));
 //			ECKeyPair mnemonicKeyPair = ECKeyPair.create(mnemonicSeedBytes);
 //			WalletFile walletFile = Wallet.createLight(password, mnemonicKeyPair);
 //			ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
 //			//存这个keystore 用完后删除
 //			String jsonStr = objectMapper.writeValueAsString(walletFile);
-//			System.out.println("mnemonic keystore " + jsonStr);
+//			log.info("mnemonic keystore " + jsonStr);
 //			//验证
 //			WalletFile checkWalletFile = objectMapper.readValue(jsonStr, WalletFile.class);
 //			ECKeyPair ecKeyPair = Wallet.decrypt(password, checkWalletFile);
 //			byte[] checkMnemonicSeedBytes = Numeric.hexStringToByteArray(ecKeyPair.getPrivateKey().toString(16));
-//			System.out.println("验证助记词种子 "
+//			log.info("验证助记词种子 "
 //					+ Arrays.toString(checkMnemonicSeedBytes));
 //			List<String> checkMnemonic = MnemonicCode.INSTANCE.toMnemonic(checkMnemonicSeedBytes);
-//			System.out.println("验证助记词 " + Arrays.toString(checkMnemonic.toArray()));
+//			log.info("验证助记词 " + Arrays.toString(checkMnemonic.toArray()));
 //
 //		} catch (MnemonicException.MnemonicLengthException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicChecksumException | CipherException | IOException e) {
 //			e.printStackTrace();
@@ -141,20 +141,20 @@
 //			}
 //			dkKey = HDKeyDerivation.deriveChildKey(dkKey, childNumber);
 //		}
-//		System.out.println("path " + dkKey.getPathAsString());
+//		log.info("path " + dkKey.getPathAsString());
 //
 //		ECKeyPair keyPair = ECKeyPair.create(dkKey.getPrivKeyBytes());
-//		System.out.println("eth privateKey " + keyPair.getPrivateKey().toString(16));
-//		System.out.println("eth publicKey " + keyPair.getPublicKey().toString(16));
+//		log.info("eth privateKey " + keyPair.getPrivateKey().toString(16));
+//		log.info("eth publicKey " + keyPair.getPublicKey().toString(16));
 //
 //		EthHDWallet ethHDWallet = null;
 //		try {
 //			WalletFile walletFile = Wallet.createLight(password, keyPair);
-//			System.out.println("eth address " + "0x" + walletFile.getAddress());
+//			log.info("eth address " + "0x" + walletFile.getAddress());
 //			ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
 //			//存
 //			String jsonStr = objectMapper.writeValueAsString(walletFile);
-//			System.out.println("eth keystore " + jsonStr);
+//			log.info("eth keystore " + jsonStr);
 //
 //			ethHDWallet = new EthHDWallet(keyPair.getPrivateKey().toString(16),
 //					keyPair.getPublicKey().toString(16),
