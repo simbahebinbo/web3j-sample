@@ -1,6 +1,6 @@
-package com.ethjava;
+package com.github.lansheng228;
 
-import com.ethjava.utils.Environment;
+import com.github.lansheng228.utils.Environment;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 

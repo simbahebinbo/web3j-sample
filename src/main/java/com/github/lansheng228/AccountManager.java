@@ -1,6 +1,6 @@
-package com.ethjava;
+package com.github.lansheng228;
 
-import com.ethjava.utils.Environment;
+import com.github.lansheng228.utils.Environment;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.web3j.protocol.admin.methods.response.PersonalListAccounts;

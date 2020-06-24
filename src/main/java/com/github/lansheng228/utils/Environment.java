@@ -1,4 +1,4 @@
-package com.ethjava.utils;
+package com.github.lansheng228.utils;
 
 /**
  * 运行配置项
