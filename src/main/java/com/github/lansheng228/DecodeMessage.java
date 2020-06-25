@@ -59,7 +59,7 @@ public class DecodeMessage {
       log.info("address " + address);
       log.info("解密 end " + System.currentTimeMillis());
     } catch (Exception e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -75,7 +75,7 @@ public class DecodeMessage {
         String from = ((SignedRawTransaction) rawTransaction).getFrom();
         log.info("address " + from);
       } catch (SignatureException e) {
-        e.printStackTrace();
+        log.warn(e.getMessage());
       }
     }
     log.info("解密 end " + System.currentTimeMillis());

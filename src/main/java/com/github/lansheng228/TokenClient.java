@@ -86,7 +86,7 @@ public class TokenClient {
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
       balanceValue = (BigInteger) results.get(0).getValue();
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return balanceValue;
   }
@@ -120,7 +120,7 @@ public class TokenClient {
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
       name = results.get(0).getValue().toString();
     } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return name;
   }
@@ -154,7 +154,7 @@ public class TokenClient {
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
       symbol = results.get(0).getValue().toString();
     } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return symbol;
   }
@@ -188,7 +188,7 @@ public class TokenClient {
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
       decimal = Integer.parseInt(results.get(0).getValue().toString());
     } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return decimal;
   }
@@ -222,7 +222,7 @@ public class TokenClient {
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
       totalSupply = (BigInteger) results.get(0).getValue();
     } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return totalSupply;
   }
@@ -275,7 +275,7 @@ public class TokenClient {
         txHash = ethSendTransaction.getTransactionHash();
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
 
     return txHash;

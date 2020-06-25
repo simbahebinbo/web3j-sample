@@ -42,7 +42,7 @@ public class Security {
       BigInteger privateKey = credentials.getEcKeyPair().getPrivateKey();
       log.info(privateKey.toString(16));
     } catch (IOException | CipherException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -61,7 +61,7 @@ public class Security {
           WalletUtils.generateWalletFile(password, ecKeyPair, new File(directory), true);
       log.info("keystore name " + keystoreName);
     } catch (CipherException | IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -77,7 +77,7 @@ public class Security {
       Bip39Wallet bip39Wallet = WalletUtils.generateBip39Wallet(password, new File(keystorePath));
       log.info(String.valueOf(bip39Wallet));
     } catch (CipherException | IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 }

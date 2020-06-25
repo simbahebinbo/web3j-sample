@@ -68,7 +68,7 @@ public class EthInfo {
       BigInteger peerCount = netPeerCount.getQuantity();
       log.info(String.valueOf(peerCount));
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 }

@@ -34,7 +34,7 @@ public class AccountManager {
       String address = newAccountIdentifier.getAccountId();
       log.info("new account address " + address);
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -49,7 +49,7 @@ public class AccountManager {
         log.info(address);
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -65,7 +65,7 @@ public class AccountManager {
       Boolean isUnlocked = personalUnlockAccount.accountUnlocked();
       log.info("account unlock " + isUnlocked);
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 }

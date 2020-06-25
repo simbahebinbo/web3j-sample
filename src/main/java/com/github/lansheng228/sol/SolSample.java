@@ -28,7 +28,7 @@
 //			TokenERC20 tokenERC20 = deploy.send();
 //			tokenERC20.isValid();
 //		} catch (Exception e) {
-//			e.printStackTrace();
+//			log.warn(e.getMessage());
 //		}
 //
 //	}
@@ -48,7 +48,7 @@
 //			TransactionReceipt receipt = contract.transfer(toAddress, amount).send();
 //			//etc..
 //		} catch (Exception e) {
-//			e.printStackTrace();
+//			log.warn(e.getMessage());
 //		}
 //	}
 //}

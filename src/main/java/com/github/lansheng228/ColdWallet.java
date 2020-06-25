@@ -55,7 +55,7 @@ public class ColdWallet {
       //			testTransaction();
       //			testTokenTransaction();
     } catch (Exception e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -66,7 +66,7 @@ public class ColdWallet {
       ethGetTransactionCount =
           web3j.ethGetTransactionCount(address, DefaultBlockParameterName.PENDING).send();
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     if (ethGetTransactionCount == null) return;
     nonce = ethGetTransactionCount.getTransactionCount();
@@ -85,7 +85,7 @@ public class ColdWallet {
         log.info(ethSendTransaction.getTransactionHash());
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -103,7 +103,7 @@ public class ColdWallet {
       ethGetTransactionCount =
           web3j.ethGetTransactionCount(fromAddress, DefaultBlockParameterName.PENDING).send();
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     if (ethGetTransactionCount == null) return;
     nonce = ethGetTransactionCount.getTransactionCount();
@@ -137,7 +137,7 @@ public class ColdWallet {
         log.info(ethSendTransaction.getTransactionHash());
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
   }
 
@@ -177,9 +177,9 @@ public class ColdWallet {
       if ("Invalid password provided".equals(e.getMessage())) {
         log.info("密码错误");
       }
-      e.printStackTrace();
+      log.warn(e.getMessage());
     } catch (IOException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return privateKey;
   }

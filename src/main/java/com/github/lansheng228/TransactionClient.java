@@ -1,6 +1,5 @@
 package com.github.lansheng228;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -18,7 +17,6 @@ import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 
-
 @Slf4j
 public class TransactionClient {
   private static Web3j web3j;
@@ -33,7 +31,7 @@ public class TransactionClient {
     admin = Admin.build(new HttpService(Environment.RPC_URL));
 
     getBalance(fromAddress);
-    sendTransaction();
+//    sendTransaction();
   }
 
   /**
@@ -48,8 +46,8 @@ public class TransactionClient {
       EthGetBalance ethGetBalance =
           web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
       balance = ethGetBalance.getBalance();
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      log.warn(e.getMessage());
     }
     log.info("address " + address + " balance " + balance + "wei");
     return balance;
@@ -91,8 +89,8 @@ public class TransactionClient {
     try {
       EthEstimateGas ethEstimateGas = web3j.ethEstimateGas(transaction).send();
       gasLimit = ethEstimateGas.getAmountUsed();
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      log.warn(e.getMessage());
     }
     return gasLimit;
   }
@@ -109,8 +107,8 @@ public class TransactionClient {
       EthGetTransactionCount ethGetTransactionCount =
           web3j.ethGetTransactionCount(address, DefaultBlockParameterName.PENDING).send();
       nonce = ethGetTransactionCount.getTransactionCount();
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      log.warn(e.getMessage());
     }
     return nonce;
   }
@@ -141,8 +139,8 @@ public class TransactionClient {
         EthSendTransaction ethSendTransaction = web3j.ethSendTransaction(transaction).send();
         txHash = ethSendTransaction.getTransactionHash();
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      log.warn(e.getMessage());
     }
     log.info("tx hash " + txHash);
     return txHash;

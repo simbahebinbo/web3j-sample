@@ -35,7 +35,7 @@ public class ClearMemory {
       UNSAFE = (Unsafe) theUnsafe.get(null);
       log.info(String.valueOf(UNSAFE));
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      e.printStackTrace();
+      log.warn(e.getMessage());
     }
     return UNSAFE;
   }

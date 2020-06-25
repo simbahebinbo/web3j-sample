@@ -123,7 +123,7 @@
 //			log.info("验证助记词 " + Arrays.toString(checkMnemonic.toArray()));
 //
 //		} catch (MnemonicException.MnemonicLengthException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicChecksumException | CipherException | IOException e) {
-//			e.printStackTrace();
+//			log.warn(e.getMessage());
 //		}
 //
 //		if (seedBytes == null)
@@ -161,7 +161,7 @@
 //					mnemonic, dkKey.getPathAsString(),
 //					"0x" + walletFile.getAddress(), jsonStr);
 //		} catch (CipherException | JsonProcessingException e) {
-//			e.printStackTrace();
+//			log.warn(e.getMessage());
 //		}
 //
 //		return ethHDWallet;
