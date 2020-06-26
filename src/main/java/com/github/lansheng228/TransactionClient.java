@@ -7,6 +7,7 @@ import com.github.lansheng228.utils.Environment;
 import com.github.lansheng228.utils.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
@@ -14,14 +15,13 @@ import org.web3j.protocol.core.methods.response.EthEstimateGas;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.geth.Geth;
 import org.web3j.utils.Convert;
 
 @Slf4j
 public class TransactionClient {
 
   private static Web3j web3j;
-  private static Geth geth;
+  private static Admin admin;
 
 
   private static BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
@@ -30,7 +30,7 @@ public class TransactionClient {
 
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
-    geth = Geth.build(Environment.getService());
+    admin = Admin.build(Environment.getService());
 
     log.info("转账前:");
     getBalance(fromAddress);
@@ -133,7 +133,7 @@ public class TransactionClient {
 
     try {
       PersonalUnlockAccount personalUnlockAccount =
-          geth.personalUnlockAccount(fromAddress, password, unlockDuration).send();
+          admin.personalUnlockAccount(fromAddress, password, unlockDuration).send();
       if (personalUnlockAccount.accountUnlocked()) {
         log.info("解锁成功");
         BigInteger value = Convert.toWei(amount, Convert.Unit.ETHER).toBigInteger();

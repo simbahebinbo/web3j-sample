@@ -21,16 +21,16 @@ public class AccountManager {
 
   public static void main(String[] args) {
     admin = Admin.build(Environment.getService());
-    String address = createNewAccount();
+    String password = "123456789";
+    String address = createNewAccount(password);
     getAccountList();
-    unlockAccount(address);
+    unlockAccount(address, password);
   }
 
   /**
    * 创建账号
    */
-  private static String createNewAccount() {
-    String password = "123456789";
+  private static String createNewAccount(String password) {
     String address = null;
     try {
       NewAccountIdentifier newAccountIdentifier = admin.personalNewAccount(password).send();
@@ -63,8 +63,7 @@ public class AccountManager {
   /**
    * 账号解锁
    */
-  private static void unlockAccount(String address) {
-    String password = "123456789";
+  private static void unlockAccount(String address, String password) {
     // 账号解锁持续时间 单位秒 缺省值300秒
     BigInteger unlockDuration = BigInteger.valueOf(60L);
     try {
