@@ -4,9 +4,10 @@ import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
-import org.web3j.protocol.http.HttpService;
 
-/** 快速开始 */
+/**
+ * 快速开始
+ */
 @Slf4j
 public class QuickStart {
 

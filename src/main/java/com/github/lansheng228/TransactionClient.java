@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import com.github.lansheng228.utils.Environment;
+import com.github.lansheng228.utils.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
@@ -22,6 +23,7 @@ public class TransactionClient {
   private static Web3j web3j;
   private static Geth geth;
 
+
   private static BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
   private static String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
   private static String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
@@ -33,6 +35,7 @@ public class TransactionClient {
     log.info("转账前:");
     getBalance(fromAddress);
     sendTransaction();
+    TimeUtil.sleep(10 * 1000);
     log.info("转账后:");
     getBalance(fromAddress);
   }
@@ -138,10 +141,13 @@ public class TransactionClient {
         Transaction transaction = makeTransaction(fromAddress, toAddress, null, null, null, value);
         // 不是必须的 可以使用默认值
         BigInteger gasLimit = getTransactionGasLimit(transaction);
+        log.info("gasLimit:" + gasLimit);
         // 不是必须的 缺省值就是正确的值
         BigInteger nonce = getTransactionNonce(fromAddress);
+        log.info("nonce:" + nonce);
         // 该值为大部分矿工可接受的gasPrice
         BigInteger gasPrice = Convert.toWei(defaultGasPrice, Convert.Unit.GWEI).toBigInteger();
+        log.info("gasPrice:" + gasPrice);
         transaction = makeTransaction(fromAddress, toAddress, nonce, gasPrice, gasLimit, value);
         EthSendTransaction ethSendTransaction = web3j.ethSendTransaction(transaction).send();
         txHash = ethSendTransaction.getTransactionHash();
@@ -152,6 +158,4 @@ public class TransactionClient {
     log.info("tx hash " + txHash);
     return txHash;
   }
-
-  // 使用 web3j.ethSendRawTransaction() 发送交易 需要用私钥自签名交易 详见ColdWallet.java
 }

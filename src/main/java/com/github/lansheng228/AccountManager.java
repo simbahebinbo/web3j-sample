@@ -1,44 +1,51 @@
 package com.github.lansheng228;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.List;
+
 import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.web3j.protocol.admin.methods.response.PersonalListAccounts;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
-import org.web3j.protocol.http.HttpService;
 
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.List;
-
-/** 账号管理相关 */
+/**
+ * 账号管理相关
+ */
 @Slf4j
 public class AccountManager {
+
   private static Admin admin;
 
   public static void main(String[] args) {
     admin = Admin.build(Environment.getService());
-    createNewAccount();
+    String address = createNewAccount();
     getAccountList();
-    unlockAccount();
-
-    //		admin.personalSendTransaction(); 该方法与web3j.sendTransaction相同 不在此写例子。
+    unlockAccount(address);
   }
 
-  /** 创建账号 */
-  private static void createNewAccount() {
+  /**
+   * 创建账号
+   */
+  private static String createNewAccount() {
     String password = "123456789";
+    String address = null;
     try {
       NewAccountIdentifier newAccountIdentifier = admin.personalNewAccount(password).send();
-      String address = newAccountIdentifier.getAccountId();
+      address = newAccountIdentifier.getAccountId();
       log.info("new account address " + address);
     } catch (IOException e) {
       log.warn(e.getMessage());
     }
+
+    return address;
   }
 
-  /** 获取账号列表 */
+  /**
+   * 获取账号列表
+   */
   private static void getAccountList() {
     try {
       PersonalListAccounts personalListAccounts = admin.personalListAccounts().send();
@@ -53,9 +60,10 @@ public class AccountManager {
     }
   }
 
-  /** 账号解锁 */
-  private static void unlockAccount() {
-    String address = "0x05f50cd5a97d9b3fec35df3d0c6c8234e6793bdf";
+  /**
+   * 账号解锁
+   */
+  private static void unlockAccount(String address) {
     String password = "123456789";
     // 账号解锁持续时间 单位秒 缺省值300秒
     BigInteger unlockDuration = BigInteger.valueOf(60L);
