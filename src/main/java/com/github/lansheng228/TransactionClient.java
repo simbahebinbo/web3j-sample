@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
@@ -14,13 +13,14 @@ import org.web3j.protocol.core.methods.response.EthEstimateGas;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
+import org.web3j.protocol.geth.Geth;
 import org.web3j.utils.Convert;
 
 @Slf4j
 public class TransactionClient {
 
   private static Web3j web3j;
-  private static Admin admin;
+  private static Geth geth;
 
   private static BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
   private static String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
@@ -28,10 +28,13 @@ public class TransactionClient {
 
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
-    admin = Admin.build(Environment.getService());
+    geth = Geth.build(Environment.getService());
 
+    log.info("转账前:");
     getBalance(fromAddress);
     sendTransaction();
+    log.info("转账后:");
+    getBalance(fromAddress);
   }
 
   /**
@@ -122,14 +125,16 @@ public class TransactionClient {
     String password = "123";
     //解锁有效时间，单位秒
     BigInteger unlockDuration = BigInteger.valueOf(60L);
-    BigDecimal amount = new BigDecimal("0.01");
+    BigDecimal amount = new BigDecimal("0.00000555");
     String txHash = null;
+
     try {
       PersonalUnlockAccount personalUnlockAccount =
-          admin.personalUnlockAccount(fromAddress, password, unlockDuration).send();
+          geth.personalUnlockAccount(fromAddress, password, unlockDuration).send();
       if (personalUnlockAccount.accountUnlocked()) {
         log.info("解锁成功");
         BigInteger value = Convert.toWei(amount, Convert.Unit.ETHER).toBigInteger();
+        log.info("转账金额:" + value);
         Transaction transaction = makeTransaction(fromAddress, toAddress, null, null, null, value);
         // 不是必须的 可以使用默认值
         BigInteger gasLimit = getTransactionGasLimit(transaction);
