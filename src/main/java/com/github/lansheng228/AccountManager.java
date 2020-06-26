@@ -18,7 +18,7 @@ public class AccountManager {
   private static Admin admin;
 
   public static void main(String[] args) {
-    admin = Admin.build(new HttpService(Environment.RPC_URL));
+    admin = Admin.build(Environment.getService());
     createNewAccount();
     getAccountList();
     unlockAccount();

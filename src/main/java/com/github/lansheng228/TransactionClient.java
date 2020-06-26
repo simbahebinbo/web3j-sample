@@ -14,24 +14,24 @@ import org.web3j.protocol.core.methods.response.EthEstimateGas;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 
 @Slf4j
 public class TransactionClient {
+
   private static Web3j web3j;
   private static Admin admin;
 
-  private static String fromAddress = "0x7b1cc408fcb2de1d510c1bf46a329e9027db4112";
-  private static String toAddress = "0x05f50cd5a97d9b3fec35df3d0c6c8234e6793bdf";
   private static BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
+  private static String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
+  private static String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
-    admin = Admin.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
+    admin = Admin.build(Environment.getService());
 
     getBalance(fromAddress);
-//    sendTransaction();
+    sendTransaction();
   }
 
   /**
@@ -119,7 +119,8 @@ public class TransactionClient {
    * @return 交易 Hash
    */
   private static String sendTransaction() {
-    String password = "yzw";
+    String password = "123";
+    //解锁有效时间，单位秒
     BigInteger unlockDuration = BigInteger.valueOf(60L);
     BigDecimal amount = new BigDecimal("0.01");
     String txHash = null;
@@ -127,6 +128,7 @@ public class TransactionClient {
       PersonalUnlockAccount personalUnlockAccount =
           admin.personalUnlockAccount(fromAddress, password, unlockDuration).send();
       if (personalUnlockAccount.accountUnlocked()) {
+        log.info("解锁成功");
         BigInteger value = Convert.toWei(amount, Convert.Unit.ETHER).toBigInteger();
         Transaction transaction = makeTransaction(fromAddress, toAddress, null, null, null, value);
         // 不是必须的 可以使用默认值

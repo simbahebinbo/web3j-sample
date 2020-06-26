@@ -48,7 +48,7 @@ public class ColdWallet {
       "f4529331f460fa88cc14eb981baf90201e7fc709386bf2f5b9ec687639f70086";
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
     try {
       //			createWallet("11111111");
       //			decryptWallet(keystore, "11111111");

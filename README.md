@@ -3,12 +3,11 @@ web3 for java 样例程序 (基于web3j 5.0.0)
 环境 idea maven  
 运行前提 需要有一个开启RPC或者IPC服务的以太坊节点
 
-安装以太坊节点:
-```
-$ docker pull ethereum/client-go
-$ docker run --name eth --detach -p 8546:8546 -p 8545:8545 -v ~/.geth-ropsten:/geth -it ethereum/client-go --syncmode "light" --ropsten --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --http --http.addr 0.0.0.0 --http.corsdomain "*" --http.api="eth,net,web3,personal" --datadir /geth  --nousb
-```
+*  [搭建以太坊私有链节点](https://lansheng228.github.io/posts/6d8a95bf/)
 
+*  [搭建以太坊测试链节点](https://lansheng228.github.io/posts/fad837cb/)
+
+本次开发使用私有链。
 
 - [QuickStart](https://github.com/ethjava/web3j-sample/blob/master/src/main/java/com/ethjava/QuickStart.java) 快速开始
 

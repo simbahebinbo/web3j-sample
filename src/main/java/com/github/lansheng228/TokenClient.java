@@ -27,7 +27,6 @@ import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthCall;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 
 /** 基于ERC20的代币 */
@@ -45,8 +44,8 @@ public class TokenClient {
   private static String emptyAddress = "0x0000000000000000000000000000000000000000";
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
-    admin = Admin.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
+    admin = Admin.build(Environment.getService());
     getTokenBalance(web3j, fromAddress, contractAddress);
     log.info(getTokenName(web3j, contractAddress));
     log.info(String.valueOf(getTokenDecimals(web3j, contractAddress)));

@@ -22,14 +22,14 @@ public class EthInfo {
   private static Web3j web3j;
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
     getEthInfo();
   }
 
   /** 请求区块链的信息 */
   private static void getEthInfo() {
 
-    Web3ClientVersion web3ClientVersion = null;
+    Web3ClientVersion web3ClientVersion;
     try {
       // 客户端版本
       web3ClientVersion = web3j.web3ClientVersion().send();

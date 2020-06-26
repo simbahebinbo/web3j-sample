@@ -11,7 +11,7 @@ import org.web3j.protocol.http.HttpService;
 public class QuickStart {
 
   public static void main(String[] args) {
-    Web3j web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+    Web3j web3j = Web3j.build(Environment.getService());
 
     try {
       Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();

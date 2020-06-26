@@ -17,7 +17,7 @@
 //  private static Web3j web3j;
 //
 //  public static void main(String[] args) {
-//    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+//    web3j = Web3j.build(Environment.getService());
 //    /**
 //     * 新区块监听
 //     */

@@ -38,7 +38,7 @@ public class TokenBalanceTask {
   private static List<String> addressList;
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
     loadData();
     // 如果没有decimals则需要请求
     requestDecimals();

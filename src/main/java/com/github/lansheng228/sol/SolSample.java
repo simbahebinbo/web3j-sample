@@ -17,7 +17,7 @@
 //	}
 //
 //	private static void deploy() {
-//		Web3j web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+//		Web3j web3j = Web3j.build(Environment.getService());
 //		Credentials credentials = null;//可以根据私钥生成
 //		RemoteCall<TokenERC20> deploy = TokenERC20.deploy(web3j, credentials,
 //				Convert.toWei("10", Convert.Unit.GWEI).toBigInteger(),
@@ -34,7 +34,7 @@
 //	}
 //
 //	private static void use() {
-//		Web3j web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+//		Web3j web3j = Web3j.build(Environment.getService());
 //		String contractAddress = null;
 //		Credentials credentials = null;//可以根据私钥生成
 //		TokenERC20 contract = TokenERC20.load(contractAddress, web3j, credentials,

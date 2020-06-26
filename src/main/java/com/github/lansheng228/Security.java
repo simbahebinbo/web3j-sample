@@ -19,7 +19,7 @@ public class Security {
   private static Web3j web3j;
 
   public static void main(String[] args) {
-    web3j = Web3j.build(new HttpService(Environment.RPC_URL));
+    web3j = Web3j.build(Environment.getService());
 
     exportPrivateKey(
         "/Users/yangzhengwei/Library/Ethereum/testnet/keystore/UTC--2018-03-03T03-51-50.155565446Z--7b1cc408fcb2de1d510c1bf46a329e9027db4112",
