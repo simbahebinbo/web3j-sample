@@ -36,7 +36,7 @@ public class AccountManager {
       NewAccountIdentifier newAccountIdentifier = admin.personalNewAccount(password).send();
       address = newAccountIdentifier.getAccountId();
       log.info("new account address " + address);
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
 
@@ -55,7 +55,7 @@ public class AccountManager {
       for (String address : addressList) {
         log.info(address);
       }
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }
@@ -71,7 +71,7 @@ public class AccountManager {
           admin.personalUnlockAccount(address, password, unlockDuration).send();
       Boolean isUnlocked = personalUnlockAccount.accountUnlocked();
       log.info("account unlock " + isUnlocked);
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }
