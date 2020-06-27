@@ -1,5 +1,10 @@
 package com.github.lansheng228.utils;
 
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TimeUtil {
 
   //睡眠 millis 毫秒
