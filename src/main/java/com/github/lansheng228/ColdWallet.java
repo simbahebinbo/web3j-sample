@@ -1,27 +1,5 @@
 package com.github.lansheng228;
 
-import com.github.lansheng228.utils.Environment;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Bool;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.crypto.*;
-import org.web3j.protocol.ObjectMapperFactory;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.ChainId;
-import org.web3j.utils.Convert;
-import org.web3j.utils.Numeric;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -30,6 +8,34 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.lansheng228.utils.Environment;
+import lombok.extern.slf4j.Slf4j;
+import org.web3j.abi.FunctionEncoder;
+import org.web3j.abi.TypeReference;
+import org.web3j.abi.datatypes.Address;
+import org.web3j.abi.datatypes.Bool;
+import org.web3j.abi.datatypes.Function;
+import org.web3j.abi.datatypes.Type;
+import org.web3j.abi.datatypes.generated.Uint256;
+import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Keys;
+import org.web3j.crypto.RawTransaction;
+import org.web3j.crypto.TransactionEncoder;
+import org.web3j.crypto.Wallet;
+import org.web3j.crypto.WalletFile;
+import org.web3j.protocol.ObjectMapperFactory;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
+import org.web3j.tx.ChainId;
+import org.web3j.utils.Convert;
+import org.web3j.utils.Numeric;
 
 /** 冷钱包 账号 交易相关 */
 @Slf4j
@@ -65,7 +71,7 @@ public class ColdWallet {
     try {
       ethGetTransactionCount =
           web3j.ethGetTransactionCount(address, DefaultBlockParameterName.PENDING).send();
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
     if (ethGetTransactionCount == null) return;
@@ -84,7 +90,7 @@ public class ColdWallet {
         EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(signedData).send();
         log.info(ethSendTransaction.getTransactionHash());
       }
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }
@@ -102,7 +108,7 @@ public class ColdWallet {
     try {
       ethGetTransactionCount =
           web3j.ethGetTransactionCount(fromAddress, DefaultBlockParameterName.PENDING).send();
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
     if (ethGetTransactionCount == null) return;
@@ -136,7 +142,7 @@ public class ColdWallet {
         EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(signedData).send();
         log.info(ethSendTransaction.getTransactionHash());
       }
-    } catch (IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }

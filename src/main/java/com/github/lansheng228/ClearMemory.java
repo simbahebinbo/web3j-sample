@@ -1,10 +1,10 @@
 package com.github.lansheng228;
 
-import sun.misc.Unsafe;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashSet;
+
+import sun.misc.Unsafe;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +34,7 @@ public class ClearMemory {
       theUnsafe.setAccessible(true);
       UNSAFE = (Unsafe) theUnsafe.get(null);
       log.info(String.valueOf(UNSAFE));
-    } catch (NoSuchFieldException | IllegalAccessException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
     return UNSAFE;

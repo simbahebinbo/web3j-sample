@@ -1,33 +1,37 @@
 package com.github.lansheng228;
 
 import java.io.File;
-import java.io.IOException;
 import java.math.BigInteger;
+import java.net.URL;
 
 import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.crypto.Bip39Wallet;
-import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.http.HttpService;
 
 @Slf4j
 public class Security {
+
   private static Web3j web3j;
 
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
 
-    exportPrivateKey(
-        "/Users/yangzhengwei/Library/Ethereum/testnet/keystore/UTC--2018-03-03T03-51-50.155565446Z--7b1cc408fcb2de1d510c1bf46a329e9027db4112",
-        "yzw");
+    // 获取URL
+    URL url = Security.class.getClassLoader().getResource("UTC--2020-06-26T04-45-06.821393158Z--c719405d30703230359afe351f32e364ab26e8ee");
+    // 通过url获取File的绝对路径
+    File f = new File(url.getFile());
 
-    importPrivateKey(new BigInteger("", 16), "yzw", WalletUtils.getTestnetKeyDirectory());
+    String password = "123";
+    String directory = System.getProperty("user.home");
+    String privateKey = exportPrivateKey(f.getAbsolutePath(), password);
 
-    exportBip39Wallet(WalletUtils.getTestnetKeyDirectory(), "yzw");
+    importPrivateKey(new BigInteger(privateKey, 16), password, directory);
+
+    exportBip39Wallet(directory, password);
   }
 
   /**
@@ -36,14 +40,17 @@ public class Security {
    * @param keystorePath 账号的keystore路径
    * @param password 密码
    */
-  private static void exportPrivateKey(String keystorePath, String password) {
+  private static String exportPrivateKey(String keystorePath, String password) {
+    String privateKey = "";
     try {
       Credentials credentials = WalletUtils.loadCredentials(password, keystorePath);
-      BigInteger privateKey = credentials.getEcKeyPair().getPrivateKey();
-      log.info(privateKey.toString(16));
-    } catch (IOException | CipherException e) {
+      privateKey = credentials.getEcKeyPair().getPrivateKey().toString(16);
+      log.info(privateKey);
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
+
+    return privateKey;
   }
 
   /**
@@ -51,32 +58,26 @@ public class Security {
    *
    * @param privateKey 私钥
    * @param password 密码
-   * @param directory 存储路径 默认测试网络WalletUtils.getTestnetKeyDirectory() 默认主网络
-   *     WalletUtils.getMainnetKeyDirectory()
+   * @param directory 存储路径 默认测试网络WalletUtils.getTestnetKeyDirectory() 默认主网络 WalletUtils.getMainnetKeyDirectory()
    */
   private static void importPrivateKey(BigInteger privateKey, String password, String directory) {
     ECKeyPair ecKeyPair = ECKeyPair.create(privateKey);
     try {
-      String keystoreName =
-          WalletUtils.generateWalletFile(password, ecKeyPair, new File(directory), true);
+      String keystoreName = WalletUtils.generateWalletFile(password, ecKeyPair, new File(directory), true);
       log.info("keystore name " + keystoreName);
-    } catch (CipherException | IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }
 
   /**
    * 生成带助记词的账号
-   *
-   * @param keystorePath
-   * @param password
    */
   private static void exportBip39Wallet(String keystorePath, String password) {
     try {
-      // TODO: 2018/3/14 会抛异常 已经向官方提issue 待回复
       Bip39Wallet bip39Wallet = WalletUtils.generateBip39Wallet(password, new File(keystorePath));
       log.info(String.valueOf(bip39Wallet));
-    } catch (CipherException | IOException e) {
+    } catch (Exception e) {
       log.warn(e.getMessage());
     }
   }
