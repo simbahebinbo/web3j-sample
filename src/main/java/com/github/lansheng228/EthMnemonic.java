@@ -1,21 +1,19 @@
 //package com.github.lansheng228;
 //
-//import java.io.IOException;
 //import java.security.SecureRandom;
 //import java.util.ArrayList;
 //import java.util.Arrays;
 //import java.util.List;
 //
-//import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.github.lansheng228.common.CommonConstant;
+//import com.github.lansheng228.model.EthHDWallet;
 //import lombok.extern.slf4j.Slf4j;
 //import org.bitcoinj.crypto.ChildNumber;
 //import org.bitcoinj.crypto.DeterministicKey;
 //import org.bitcoinj.crypto.HDKeyDerivation;
 //import org.bitcoinj.crypto.MnemonicCode;
-//import org.bitcoinj.crypto.MnemonicException;
 //import org.bitcoinj.wallet.DeterministicSeed;
-//import org.web3j.crypto.CipherException;
 //import org.web3j.crypto.ECKeyPair;
 //import org.web3j.crypto.Wallet;
 //import org.web3j.crypto.WalletFile;
@@ -58,11 +56,11 @@
 //  }
 //
 //  public static EthHDWallet generateMnemonic(String path, String password) {
-//    if (!path.startsWith("m") && !path.startsWith("M")) {
+//    if ((!path.startsWith("m")) && (!path.startsWith("M"))) {
 //      //参数非法
 //      return null;
 //    }
-//    String[] pathArray = path.split("/");
+//    String[] pathArray = path.split(CommonConstant.SEPARATOR_VIRGULE);
 //    if (pathArray.length <= 1) {
 //      //内容不对
 //      return null;
@@ -74,8 +72,8 @@
 //    }
 //
 //    String passphrase = "";
-//    long creationTimeSeconds = System.currentTimeMillis() / 1000;
-//    DeterministicSeed ds = new DeterministicSeed(secureRandom, 128, passphrase, creationTimeSeconds);
+//    DeterministicSeed ds = new DeterministicSeed(secureRandom, 128, passphrase);
+//
 //    return createEthWallet(ds, pathArray, password);
 //  }
 //
@@ -122,12 +120,11 @@
 //      WalletFile checkWalletFile = objectMapper.readValue(jsonStr, WalletFile.class);
 //      ECKeyPair ecKeyPair = Wallet.decrypt(password, checkWalletFile);
 //      byte[] checkMnemonicSeedBytes = Numeric.hexStringToByteArray(ecKeyPair.getPrivateKey().toString(16));
-//      log.info("验证助记词种子 "
-//          + Arrays.toString(checkMnemonicSeedBytes));
+//      log.info("验证助记词种子 " + Arrays.toString(checkMnemonicSeedBytes));
 //      List<String> checkMnemonic = MnemonicCode.INSTANCE.toMnemonic(checkMnemonicSeedBytes);
 //      log.info("验证助记词 " + Arrays.toString(checkMnemonic.toArray()));
 //
-//    } catch (MnemonicException.MnemonicLengthException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicChecksumException | CipherException | IOException e) {
+//    } catch (Exception e) {
 //      log.warn(e.getMessage());
 //    }
 //
@@ -166,30 +163,10 @@
 //          keyPair.getPublicKey().toString(16),
 //          mnemonic, dkKey.getPathAsString(),
 //          "0x" + walletFile.getAddress(), jsonStr);
-//    } catch (CipherException | JsonProcessingException e) {
+//    } catch (Exception e) {
 //      log.warn(e.getMessage());
 //    }
 //
 //    return ethHDWallet;
 //  }
-//
-//  public static class EthHDWallet {
-//
-//    String privateKey;
-//    String publicKey;
-//    List<String> mnemonic;
-//    String mnemonicPath;
-//    String Address;
-//    String keystore;
-//
-//    public EthHDWallet(String privateKey, String publicKey, List<String> mnemonic, String mnemonicPath, String address, String keystore) {
-//      this.privateKey = privateKey;
-//      this.publicKey = publicKey;
-//      this.mnemonic = mnemonic;
-//      this.mnemonicPath = mnemonicPath;
-//      this.Address = address;
-//      this.keystore = keystore;
-//    }
-//  }
-//
 //}
