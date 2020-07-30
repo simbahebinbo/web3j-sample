@@ -1,9 +1,21 @@
 # web3j-sample
 web3 for java 样例程序
 
-基于web3j 5.0.0
+###  依赖包
+web3j 5.0.0
+maven 3.6.3
 
-环境 maven  3.6.3
+###  安装 solidity 和 web3j
+```
+$ brew tap ethereum/ethereum
+$ brew install solidity
+$ brew tap web3j/web3j
+$ brew install web3j
+$ web3j version
+4.5.16
+$ solc --version 
+0.7.0
+```
 
 
 运行前提 需要有一个开启RPC或者IPC服务的以太坊节点
