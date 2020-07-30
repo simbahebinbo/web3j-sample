@@ -73,7 +73,7 @@ public class SolSample {
 
     try {
       //从发行账户向某个地址转账
-      contract.transfer(myAddress, BigInteger.valueOf(1)).send();
+      contract.transfer(myAddress, BigInteger.valueOf(100000)).send();
       //该账户余额
       log.info("myAddress balance: " + contract.balanceOf(myAddress).send());
       //发行的币总量
