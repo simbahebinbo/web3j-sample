@@ -29,7 +29,9 @@ import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.utils.Convert;
 
-/** 基于ERC20的代币 */
+/**
+ * 基于ERC20的代币
+ */
 @Slf4j
 public class TokenClient {
 
@@ -60,7 +62,9 @@ public class TokenClient {
             BigInteger.valueOf(100000)));
   }
 
-  /** 查询代币余额 */
+  /**
+   * 查询代币余额
+   */
   public static BigInteger getTokenBalance(
       Web3j web3j, String fromAddress, String contractAddress) {
 
@@ -70,7 +74,8 @@ public class TokenClient {
     Address address = new Address(fromAddress);
     inputParameters.add(address);
 
-    TypeReference<Uint256> typeReference = new TypeReference<Uint256>() {};
+    TypeReference<Uint256> typeReference = new TypeReference<Uint256>() {
+    };
     outputParameters.add(typeReference);
     Function function = new Function(methodName, inputParameters, outputParameters);
     String data = FunctionEncoder.encode(function);
@@ -92,10 +97,6 @@ public class TokenClient {
 
   /**
    * 查询代币名称
-   *
-   * @param web3j
-   * @param contractAddress
-   * @return
    */
   public static String getTokenName(Web3j web3j, String contractAddress) {
     String methodName = "name";
@@ -104,7 +105,8 @@ public class TokenClient {
     List<Type> inputParameters = new ArrayList<>();
     List<TypeReference<?>> outputParameters = new ArrayList<>();
 
-    TypeReference<Utf8String> typeReference = new TypeReference<Utf8String>() {};
+    TypeReference<Utf8String> typeReference = new TypeReference<Utf8String>() {
+    };
     outputParameters.add(typeReference);
 
     Function function = new Function(methodName, inputParameters, outputParameters);
@@ -126,10 +128,6 @@ public class TokenClient {
 
   /**
    * 查询代币符号
-   *
-   * @param web3j
-   * @param contractAddress
-   * @return
    */
   public static String getTokenSymbol(Web3j web3j, String contractAddress) {
     String methodName = "symbol";
@@ -138,7 +136,8 @@ public class TokenClient {
     List<Type> inputParameters = new ArrayList<>();
     List<TypeReference<?>> outputParameters = new ArrayList<>();
 
-    TypeReference<Utf8String> typeReference = new TypeReference<Utf8String>() {};
+    TypeReference<Utf8String> typeReference = new TypeReference<Utf8String>() {
+    };
     outputParameters.add(typeReference);
 
     Function function = new Function(methodName, inputParameters, outputParameters);
@@ -160,10 +159,6 @@ public class TokenClient {
 
   /**
    * 查询代币精度
-   *
-   * @param web3j
-   * @param contractAddress
-   * @return
    */
   public static int getTokenDecimals(Web3j web3j, String contractAddress) {
     String methodName = "decimals";
@@ -172,7 +167,8 @@ public class TokenClient {
     List<Type> inputParameters = new ArrayList<>();
     List<TypeReference<?>> outputParameters = new ArrayList<>();
 
-    TypeReference<Uint8> typeReference = new TypeReference<Uint8>() {};
+    TypeReference<Uint8> typeReference = new TypeReference<Uint8>() {
+    };
     outputParameters.add(typeReference);
 
     Function function = new Function(methodName, inputParameters, outputParameters);
@@ -194,10 +190,6 @@ public class TokenClient {
 
   /**
    * 查询代币发行总量
-   *
-   * @param web3j
-   * @param contractAddress
-   * @return
    */
   public static BigInteger getTokenTotalSupply(Web3j web3j, String contractAddress) {
     String methodName = "totalSupply";
@@ -206,7 +198,8 @@ public class TokenClient {
     List<Type> inputParameters = new ArrayList<>();
     List<TypeReference<?>> outputParameters = new ArrayList<>();
 
-    TypeReference<Uint256> typeReference = new TypeReference<Uint256>() {};
+    TypeReference<Uint256> typeReference = new TypeReference<Uint256>() {
+    };
     outputParameters.add(typeReference);
 
     Function function = new Function(methodName, inputParameters, outputParameters);
@@ -226,7 +219,9 @@ public class TokenClient {
     return totalSupply;
   }
 
-  /** 代币转账 */
+  /**
+   * 代币转账
+   */
   public static String sendTokenTransaction(
       String fromAddress,
       String password,
@@ -249,7 +244,8 @@ public class TokenClient {
         inputParameters.add(tAddress);
         inputParameters.add(value);
 
-        TypeReference<Bool> typeReference = new TypeReference<Bool>() {};
+        TypeReference<Bool> typeReference = new TypeReference<Bool>() {
+        };
         outputParameters.add(typeReference);
 
         Function function = new Function(methodName, inputParameters, outputParameters);
@@ -280,3 +276,4 @@ public class TokenClient {
     return txHash;
   }
 }
+
