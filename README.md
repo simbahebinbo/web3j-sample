@@ -2,8 +2,10 @@
 web3 for java 样例程序
 
 ###  依赖包
-web3j 5.0.0
-maven 3.6.3
+
+* web3j 5.0.0
+
+* maven 3.6.3
 
 ###  安装 solidity 和 web3j
 ```
