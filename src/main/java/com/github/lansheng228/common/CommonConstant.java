@@ -57,4 +57,19 @@ public class CommonConstant {
 
   // 交易费用
   public static final BigInteger GAS_VALUE = BigInteger.valueOf(100_000L);
+
+  // 节点地址
+  public static String URL = "http://172.18.18.141:8545";
+
+  // 账户密码
+  public static String PASSWORD = "123";
+
+  // 账户助记词
+  public static String MNEMONIC = "forget list latin genuine ordinary mad reflect bridge hedgehog vocal waste type";
+
+  // 账户文件路径
+  public static String KEYSTORE_NAME = "UTC--2020-06-26T04-45-06.821393158Z--c719405d30703230359afe351f32e364ab26e8ee";
+
+  // chain id, 在创世区块中定义的
+  public static long CHAIN_ID = 12121212;
 }

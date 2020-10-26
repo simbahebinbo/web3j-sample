@@ -37,13 +37,13 @@ public class TokenClient {
 
   private static Admin admin;
 
-  private static String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
-  private static String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
-  private static String password = "123";
+  private static final String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
+  private static final String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
+  private static final String fromPassword = "123";
 
-  private static String contractAddress = "0x1ba45da3df0db8d37aeaa22f92f40fa60fbe1a09";
+  private static final String contractAddress = "0x1ba45da3df0db8d37aeaa22f92f40fa60fbe1a09";
 
-  private static String emptyAddress = "0x0000000000000000000000000000000000000000";
+  private static final String emptyAddress = "0x0000000000000000000000000000000000000000";
 
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
@@ -53,7 +53,7 @@ public class TokenClient {
     log.info("token decimals: " + getTokenDecimals());
     log.info("token symbol: " + getTokenSymbol());
     log.info("token totalSupply: " + getTokenTotalSupply());
-    log.info("token transaction: " + sendTokenTransaction(fromAddress, password, toAddress, BigInteger.valueOf(1)));
+    log.info("token transaction: " + sendTokenTransaction(fromAddress, fromPassword, toAddress, BigInteger.valueOf(1)));
   }
 
   /**
@@ -80,16 +80,16 @@ public class TokenClient {
         Transaction.createEthCallTransaction(fromAddr, contractAddr, data);
 
     EthCall ethCall;
-    BigInteger balanceValue = BigInteger.ZERO;
+    BigInteger tokenBalance = BigInteger.ZERO;
     try {
       ethCall = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).send();
       List<Type> results =
           FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
-      balanceValue = (BigInteger) results.get(0).getValue();
+      tokenBalance = (BigInteger) results.get(0).getValue();
     } catch (Exception e) {
       log.warn(e.getMessage());
     }
-    return balanceValue;
+    return tokenBalance;
   }
 
   /**
@@ -270,10 +270,11 @@ public class TokenClient {
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
         BigInteger gasPrice =
             Convert.toWei(BigDecimal.valueOf(5), Convert.Unit.GWEI).toBigInteger();
+        BigInteger gasLimit = BigInteger.valueOf(60000);
 
         Transaction transaction =
             Transaction.createFunctionCallTransaction(
-                fromAddr, nonce, gasPrice, BigInteger.valueOf(60000), contractAddr, data);
+                fromAddr, nonce, gasPrice, gasLimit, contractAddr, data);
 
         EthSendTransaction ethSendTransaction =
             web3j.ethSendTransaction(transaction).sendAsync().get();

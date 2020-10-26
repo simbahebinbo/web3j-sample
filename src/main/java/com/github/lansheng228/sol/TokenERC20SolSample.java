@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.net.URL;
 
 import com.github.lansheng228.Security;
+import com.github.lansheng228.common.CommonConstant;
 import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.crypto.Credentials;
@@ -24,7 +25,7 @@ public class TokenERC20SolSample {
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
     // 获取URL
-    URL url = Security.class.getClassLoader().getResource("UTC--2020-06-26T04-45-06.821393158Z--c719405d30703230359afe351f32e364ab26e8ee");
+    URL url = Security.class.getClassLoader().getResource(CommonConstant.KEYSTORE_NAME);
     // 通过url获取File的绝对路径
     File f = new File(url.getFile());
     String password = "123";
@@ -69,15 +70,15 @@ public class TokenERC20SolSample {
         BigInteger.valueOf(100000));
 
     TokenERC20 contract = TokenERC20.load(contractAddress, web3j, credentials, contractGasProvider);
-    String myAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
+    String myAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
 
     try {
       //从发行账户向某个地址转账
-      contract.transfer(myAddress, BigInteger.valueOf(100000)).send();
+      contract.transfer(myAddress, BigInteger.valueOf(1000000000000000000L)).send();
       //该账户余额
-      log.info("myAddress balance: " + contract.balanceOf(myAddress).send());
+      log.info("myAddress {} balance(wei): {}", myAddress, contract.balanceOf(myAddress).send());
       //发行的币总量
-      log.info("totalSupply: " + contract.totalSupply().send() + "wei");
+      log.info("totalSupply(wei): " + contract.totalSupply().send());
       //币符号
       log.info("symbol: " + contract.symbol().send());
       //币名

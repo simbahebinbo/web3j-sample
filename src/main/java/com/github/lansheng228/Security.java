@@ -4,6 +4,7 @@ import java.io.File;
 import java.math.BigInteger;
 import java.net.URL;
 
+import com.github.lansheng228.common.CommonConstant;
 import com.github.lansheng228.utils.Environment;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.crypto.Bip39Wallet;
@@ -21,7 +22,7 @@ public class Security {
     web3j = Web3j.build(Environment.getService());
 
     // 获取URL
-    URL url = Security.class.getClassLoader().getResource("UTC--2020-06-26T04-45-06.821393158Z--c719405d30703230359afe351f32e364ab26e8ee");
+    URL url = Security.class.getClassLoader().getResource(CommonConstant.KEYSTORE_NAME);
     // 通过url获取File的绝对路径
     File f = new File(url.getFile());
 

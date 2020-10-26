@@ -24,9 +24,9 @@ public class TransactionClient {
   private static Admin admin;
 
 
-  private static BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
-  private static String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
-  private static String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
+  private static final BigDecimal defaultGasPrice = BigDecimal.valueOf(5);
+  private static final String fromAddress = "0xb4352408a1fAa75f49256D7E0665292d164F608c";
+  private static final String toAddress = "0xB0031507C4800AFFe12AAF070Da60C273b097a3A";
 
   public static void main(String[] args) {
     web3j = Web3j.build(Environment.getService());
@@ -47,16 +47,16 @@ public class TransactionClient {
    * @return 余额
    */
   private static BigInteger getBalance(String address) {
-    BigInteger balance = null;
+    BigInteger ethBalance = null;
     try {
       EthGetBalance ethGetBalance =
           web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
-      balance = ethGetBalance.getBalance();
+      ethBalance = ethGetBalance.getBalance();
     } catch (Exception e) {
       log.warn(e.getMessage());
     }
-    log.info("address " + address + " balance " + balance + "wei");
-    return balance;
+    log.info("address " + address + " balance(wei) " + ethBalance);
+    return ethBalance;
   }
 
   /**
