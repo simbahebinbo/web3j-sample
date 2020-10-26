@@ -17,7 +17,7 @@ import org.web3j.utils.Convert;
 
 
 @Slf4j
-public class SolSample {
+public class TokenERC20SolSample {
 
   private static Web3j web3j;
 

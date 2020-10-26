@@ -1,6 +1,8 @@
 package com.github.lansheng228.common;
 
 
+import java.math.BigInteger;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -46,4 +48,13 @@ public class CommonConstant {
    * 连字符 中横线
    */
   public static final String SEPARATOR_HYPHEN = "-";
+
+  // GAS价格
+  public static final BigInteger GAS_PRICE = BigInteger.valueOf(2000_000_000L);
+
+  // GAS上限
+  public static final BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
+
+  // 交易费用
+  public static final BigInteger GAS_VALUE = BigInteger.valueOf(100_000L);
 }
