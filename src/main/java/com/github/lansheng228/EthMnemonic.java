@@ -28,6 +28,13 @@ import org.web3j.utils.Numeric;
 /**
  * 以太坊助记词
  * 用到了比特币的jar包 org.bitcoinj
+ *
+ *  生成mnemonic > 生成seed > 生成 Extended Public Key
+ *  生成地址主要依赖Extended Public Key，加上addressIndex(0至232-1)就可以确定一个地址.
+ *  BTC使用m/44’/0’/0’/0的 Extended Public Key 生成 m/44’/0’/0’/0/*，
+ *  ETH使用m/44’/60’/0’/0的 Extended Public Key 生成 m/44’/60’/0’/0/*,
+ *  mainnet的Extended Public Key以xpub做前缀
+ *  验证网址：https://iancoleman.io/bip39/
  */
 @Slf4j
 public class EthMnemonic {
