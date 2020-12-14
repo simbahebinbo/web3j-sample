@@ -47,7 +47,7 @@ public class TransactionClient {
    * @return 余额
    */
   private static BigInteger getBalance(String address) {
-    BigInteger ethBalance = null;
+    BigInteger ethBalance = BigInteger.ZERO;
     try {
       EthGetBalance ethGetBalance =
           web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
