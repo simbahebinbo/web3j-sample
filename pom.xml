@@ -23,16 +23,17 @@
     <commons-lang3.version>3.11</commons-lang3.version>
     <commons-collections4.version>4.4</commons-collections4.version>
     <commons-io.version>2.7</commons-io.version>
-    <guava.version>29.0-jre</guava.version>
+    <guava.version>30.0-jre</guava.version>
     <gson.version>2.8.6</gson.version>
+    <hutool.version>5.5.8</hutool.version>
     <slf4j.version>1.7.30</slf4j.version>
-    <junit.jupiter.version>5.6.2</junit.jupiter.version>
-    <mockito.version>3.3.3</mockito.version>
-    <lombok.version>1.18.12</lombok.version>
+    <junit.jupiter.version>5.7.0</junit.jupiter.version>
+    <mockito.version>3.6.0</mockito.version>
+    <lombok.version>1.18.16</lombok.version>
     <awaitility.version>4.0.3</awaitility.version>
     <awaitility-proxy.version>3.1.6</awaitility-proxy.version>
 
-    <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
   </properties>
@@ -67,6 +68,12 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
       </dependency>
 
       <dependency>
@@ -168,6 +175,11 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
     </dependency>
 
     <dependency>

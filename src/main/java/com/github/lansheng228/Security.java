@@ -22,7 +22,7 @@ public class Security {
     web3j = Web3j.build(Environment.getService());
 
     // 获取URL
-    URL url = Security.class.getClassLoader().getResource(CommonConstant.KEYSTORE_NAME);
+    URL url = Security.class.getClassLoader().getResource(CommonConstant.ACCOUNT_KEYSTORE_NAME);
     // 通过url获取File的绝对路径
     File f = new File(url.getFile());
 
