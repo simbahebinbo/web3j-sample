@@ -1,10 +1,5 @@
 package com.github.lansheng228.sol;
 
-import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.abi.datatypes.Bool;
@@ -22,11 +17,17 @@ import org.web3j.tx.Contract;
 import org.web3j.tx.TransactionManager;
 import org.web3j.tx.gas.ContractGasProvider;
 
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Callable;
+
 /**
  * <p>Auto generated code.
  * <p><strong>Do not modify!</strong>
  * <p>Please use the <a href="https://docs.web3j.io/command_line.html">web3j command line tools</a>,
- * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the 
+ * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the
  * <a href="https://github.com/web3j/web3j/tree/master/codegen">codegen module</a> to update.
  *
  * <p>Generated with web3j version 4.5.16.
@@ -67,79 +68,6 @@ public class UserManagement extends Contract {
         super(BINARY, contractAddress, web3j, transactionManager, contractGasProvider);
     }
 
-    public RemoteFunctionCall<Boolean> checkRegister(String userName) {
-        final Function function = new Function(FUNC_CHECKREGISTER, 
-                Arrays.<Type>asList(new Utf8String(userName)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
-        return executeRemoteCallSingleValueReturn(function, Boolean.class);
-    }
-
-    public RemoteFunctionCall<Boolean> doLogin(String userName, String password) {
-        final Function function = new Function(FUNC_DOLOGIN, 
-                Arrays.<Type>asList(new Utf8String(userName),
-                new Utf8String(password)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
-        return executeRemoteCallSingleValueReturn(function, Boolean.class);
-    }
-
-    public RemoteFunctionCall<Tuple2<String, String>> getAllUserInfos(BigInteger index) {
-        final Function function = new Function(FUNC_GETALLUSERINFOS, 
-                Arrays.<Type>asList(new Uint256(index)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}));
-        return new RemoteFunctionCall<Tuple2<String, String>>(function,
-                new Callable<Tuple2<String, String>>() {
-                    @Override
-                    public Tuple2<String, String> call() throws Exception {
-                        List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple2<String, String>(
-                                (String) results.get(0).getValue(), 
-                                (String) results.get(1).getValue());
-                    }
-                });
-    }
-
-    public RemoteFunctionCall<BigInteger> getTotalUserNum() {
-        final Function function = new Function(FUNC_GETTOTALUSERNUM, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
-        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
-    }
-
-    public RemoteFunctionCall<Tuple2<String, String>> getUserInfoByUserName(String userName) {
-        final Function function = new Function(FUNC_GETUSERINFOBYUSERNAME, 
-                Arrays.<Type>asList(new Utf8String(userName)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}));
-        return new RemoteFunctionCall<Tuple2<String, String>>(function,
-                new Callable<Tuple2<String, String>>() {
-                    @Override
-                    public Tuple2<String, String> call() throws Exception {
-                        List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple2<String, String>(
-                                (String) results.get(0).getValue(), 
-                                (String) results.get(1).getValue());
-                    }
-                });
-    }
-
-    public RemoteFunctionCall<TransactionReceipt> register(String ethAddr, String userName, String password) {
-        final Function function = new Function(
-                FUNC_REGISTER, 
-                Arrays.<Type>asList(new Address(160, ethAddr),
-                new Utf8String(userName),
-                new Utf8String(password)),
-                Collections.<TypeReference<?>>emptyList());
-        return executeRemoteCallTransaction(function);
-    }
-
-    public RemoteFunctionCall<TransactionReceipt> updatePassword(String userName, String newPwd) {
-        final Function function = new Function(
-                FUNC_UPDATEPASSWORD, 
-                Arrays.<Type>asList(new Utf8String(userName),
-                new Utf8String(newPwd)),
-                Collections.<TypeReference<?>>emptyList());
-        return executeRemoteCallTransaction(function);
-    }
-
     @Deprecated
     public static UserManagement load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new UserManagement(contractAddress, web3j, credentials, gasPrice, gasLimit);
@@ -174,5 +102,85 @@ public class UserManagement extends Contract {
     @Deprecated
     public static RemoteCall<UserManagement> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(UserManagement.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
+    }
+
+    public RemoteFunctionCall<Boolean> checkRegister(String userName) {
+        final Function function = new Function(FUNC_CHECKREGISTER,
+                Arrays.<Type>asList(new Utf8String(userName)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
+        return executeRemoteCallSingleValueReturn(function, Boolean.class);
+    }
+
+    public RemoteFunctionCall<Boolean> doLogin(String userName, String password) {
+        final Function function = new Function(FUNC_DOLOGIN,
+                Arrays.<Type>asList(new Utf8String(userName),
+                        new Utf8String(password)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
+        return executeRemoteCallSingleValueReturn(function, Boolean.class);
+    }
+
+    public RemoteFunctionCall<Tuple2<String, String>> getAllUserInfos(BigInteger index) {
+        final Function function = new Function(FUNC_GETALLUSERINFOS,
+                Arrays.<Type>asList(new Uint256(index)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }));
+        return new RemoteFunctionCall<Tuple2<String, String>>(function,
+                new Callable<Tuple2<String, String>>() {
+                    @Override
+                    public Tuple2<String, String> call() throws Exception {
+                        List<Type> results = executeCallMultipleValueReturn(function);
+                        return new Tuple2<String, String>(
+                                (String) results.get(0).getValue(),
+                                (String) results.get(1).getValue());
+                    }
+                });
+    }
+
+    public RemoteFunctionCall<BigInteger> getTotalUserNum() {
+        final Function function = new Function(FUNC_GETTOTALUSERNUM,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                }));
+        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+    }
+
+    public RemoteFunctionCall<Tuple2<String, String>> getUserInfoByUserName(String userName) {
+        final Function function = new Function(FUNC_GETUSERINFOBYUSERNAME,
+                Arrays.<Type>asList(new Utf8String(userName)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }));
+        return new RemoteFunctionCall<Tuple2<String, String>>(function,
+                new Callable<Tuple2<String, String>>() {
+                    @Override
+                    public Tuple2<String, String> call() throws Exception {
+                        List<Type> results = executeCallMultipleValueReturn(function);
+                        return new Tuple2<String, String>(
+                                (String) results.get(0).getValue(),
+                                (String) results.get(1).getValue());
+                    }
+                });
+    }
+
+    public RemoteFunctionCall<TransactionReceipt> register(String ethAddr, String userName, String password) {
+        final Function function = new Function(
+                FUNC_REGISTER,
+                Arrays.<Type>asList(new Address(160, ethAddr),
+                        new Utf8String(userName),
+                        new Utf8String(password)),
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public RemoteFunctionCall<TransactionReceipt> updatePassword(String userName, String newPwd) {
+        final Function function = new Function(
+                FUNC_UPDATEPASSWORD,
+                Arrays.<Type>asList(new Utf8String(userName),
+                        new Utf8String(newPwd)),
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
     }
 }

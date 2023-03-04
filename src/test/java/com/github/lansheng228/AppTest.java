@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 public class AppTest {
 
-  /**
-   * Rigourous Test :-)
-   */
-  @Test
-  public void testApp() {
-    Assertions.assertTrue(true);
-  }
+    /**
+     * Rigourous Test :-)
+     */
+    @Test
+    public void testApp() {
+        Assertions.assertTrue(true);
+    }
 }
