@@ -23,10 +23,9 @@ $ solc --version
 
 运行前提 需要有一个开启RPC或者IPC服务的以太坊节点
 
-```
-下载 ganache，并启动
-https://trufflesuite.com/ganache/ 
-```
+* [搭建以太坊私有链节点](https://simbahebinbo.github.io/posts/6d8a95bf/)
+
+* [搭建以太坊测试链节点](https://simbahebinbo.github.io/posts/fad837cb/)
 
 本次开发使用私有链。
 
