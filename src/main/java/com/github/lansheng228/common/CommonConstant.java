@@ -59,7 +59,7 @@ public class CommonConstant {
     public static final BigInteger GAS_VALUE = BigInteger.valueOf(100_000L);
 
     // 节点地址
-    public static String NODE_URL = "HTTP://127.0.0.1:7545";
+    public static String NODE_URL = "http://127.0.0.1:7545";
 
     //节点用户名 和 密码
     public static String NODE_USER = "";
